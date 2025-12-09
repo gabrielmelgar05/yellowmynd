@@ -1,5 +1,5 @@
 import { PageContainer } from "./components/layout/PageContainer";
-import { CreateCarouselPage } from "./pages/CreateCarouselPage";
+import CreateCarouselPage from "./pages/CreateCarouselPage";
 
 function App() {
   return (

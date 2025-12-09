@@ -1,33 +1,38 @@
-import { CarouselForm } from "@/components/carousel/CarouselForm";
-import { CarouselPreview } from "@/components/carousel/CarouselPreview";
+// src/pages/CreateCarouselPage.tsx
+
 import { useState } from "react";
-import type { CarouselConfig, Slide } from "@/lib/types/carousel";
+import type { CarouselConfig, Slide } from "../lib/types/carousel";
+import { CarouselForm } from "../components/carousel/CarouselForm";
+import { CarouselPreview } from "../components/carousel/CarouselPreview";
 
-const DEFAULT_CONFIG: CarouselConfig = {
-  niche: "",
-  topic: "",
-  description: "",
-  audience: "",
-  tone: "educativo",
-  slidesCount: 5,
-  primaryColor: "#FFC700",
-  secondaryColor: "#000000",
-  coverLayout: "photo_full",
-};
+export default function CreateCarouselPage() {
+  const [config, setConfig] = useState<CarouselConfig>({
+    topic: "",
+    description: "",
+    niche: "",
+    audience: "",
+    tone: "educativo",
+    slidesCount: 5,
+    coverLayout: "photo_full",
+    primaryColor: "#ffcc00",
+    secondaryColor: "#ffffff",
+    userImages: [],
+    slides: [],
+  });
 
-export function CreateCarouselPage() {
-  const [config, setConfig] = useState<CarouselConfig>(DEFAULT_CONFIG);
   const [slides, setSlides] = useState<Slide[]>([]);
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+    <div className="max-w-4xl mx-auto space-y-6 py-8">
       <CarouselForm
         config={config}
         onChangeConfig={setConfig}
         onGenerateSlides={setSlides}
       />
 
-      <CarouselPreview config={config} slides={slides} />
+      {slides.length > 0 && (
+        <CarouselPreview config={config} slides={slides} />
+      )}
     </div>
   );
 }
